@@ -1,4 +1,4 @@
-# 🚦 FIT Traffic Lights for Choices  
+# 🚦 FIT - Traffic Lights for Choices  
 
 **Ferramenta de marcação visual para classificar opções em formulários web**  
 
@@ -24,9 +24,7 @@ Adicione **semáforos visuais** (🟢/🟡/🔴) a checkboxes e radio buttons em
 
 ## 🚀 Como Instalar  
 
-### Método 1: Bookmarklet (Recomendado)  
-1. Arraste este link para sua barra de favoritos:  
-(em edição) [FIT Traffic Lights] javascript:(function(){/* código minificado */})();
+### Geração Automática do Bookmarklet
+1. Acesse a página de distribuição, para o processo de geração e instalação do bookmarklet.
+2. Visite-a no seguinte endereço:  [FIT - Traffic Lights for Choices - Installation Page](https://magasine.github.io/FIT_TrafficLightsForChoices/)
 
-### Método 2: Via Console  
-1. Abra o console do navegador (**F12 > Console**).
