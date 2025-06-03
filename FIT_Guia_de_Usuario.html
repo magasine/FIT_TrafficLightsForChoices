@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Usuário - FIT Traffic Lights for Choices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6da7;
+            --secondary-color: #304878;
+            --accent-color: #5d9cec;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+            --success-color: #00C851;
+            --warning-color: #ffbb33;
+            --danger-color: #ff4444;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, transparent 75%, rgba(93, 156, 236, 0.1) 75%);
+            border-radius: 0 0 var(--border-radius) 0;
+            z-index: 1;
+        }
+
+        section:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin: 1.8rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0;
+        }
+
+        .feature-card {
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, transparent 50%, rgba(93, 156, 236, 0.1) 50%);
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            background-color: rgba(93, 156, 236, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .interactive-buttons-container {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .interactive-buttons-container:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .interactive-buttons-description {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .interactive-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .bookmarklet-button,
+        .copy-button {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            min-width: 220px;
+            justify-content: center;
+        }
+
+        .bookmarklet-button {
+            background: linear-gradient(135deg, #4a6da7, #304878);
+            color: white;
+        }
+
+        .bookmarklet-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #5d80bd, #3a5691);
+        }
+
+        .copy-button {
+            background: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .copy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            background-color: #f8f9fa;
+        }
+
+        .copy-button:active,
+        .bookmarklet-button:active {
+            transform: translateY(-1px);
+        }
+
+        .interactive-instructions {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .instruction-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .instruction-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .instruction-item h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
+
+        .traffic-light {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, #444, #222);
+            padding: 15px;
+            border-radius: 15px;
+            width: 100px;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transform: rotateX(10deg);
+            position: relative;
+        }
+
+        .traffic-light::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 20px;
+            background-color: #222;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .light {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 8px;
+            opacity: 0.3;
+            transition: var(--transition);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .light::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .red {
+            background: radial-gradient(circle at 30% 30%, #ff6666, var(--danger-color));
+        }
+
+        .yellow {
+            background: radial-gradient(circle at 30% 30%, #ffcc66, var(--warning-color));
+        }
+
+        .green {
+            background: radial-gradient(circle at 30% 30%, #33d975, var(--success-color));
+        }
+
+        .active {
+            opacity: 1;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7), inset 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .usage-steps {
+            counter-reset: step;
+            margin: 2.5rem 0;
+        }
+
+        .step {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            position: relative;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            box-shadow: var(--box-shadow);
+            transform: translateX(5px);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .code-block {
+            background-color: #f1f3f5;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            height: 150px;
+            overflow: auto;
+            margin: 1.5rem 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'JavaScript';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 0 0 0 8px;
+        }
+
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+            border: 1px solid #ddd;
+            transition: var(--transition);
+        }
+
+        .screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-container {
+            margin: 2rem 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--box-shadow);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--secondary-color);
+            padding: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--light-bg);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: #e9ecef;
+        }
+
+        .faq-question::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            padding: 1.2rem;
+            border-top: 1px solid #e9ecef;
+            background-color: white;
+        }
+
+        .state-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .state-indicator {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .state-indicator:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .state-false {
+            background-color: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+        }
+
+        .state-indeterminate {
+            background-color: rgba(255, 187, 51, 0.1);
+            border: 1px solid rgba(255, 187, 51, 0.3);
+        }
+
+        .state-true {
+            background-color: rgba(0, 200, 81, 0.1);
+            border: 1px solid rgba(0, 200, 81, 0.3);
+        }
+
+        .state-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .color-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-red {
+            background: radial-gradient(circle at 30% 30%, #ff6666, var(--danger-color));
+        }
+
+        .color-yellow {
+            background: radial-gradient(circle at 30% 30%, #ffcc66, var(--warning-color));
+        }
+
+        .color-green {
+            background: radial-gradient(circle at 30% 30%, #33d975, var(--success-color));
+        }
+
+        /* Menu de navegação fixo */
+        .nav-menu-container {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+        }
+
+        /* Menu hamburguer para mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.5rem 1rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-menu.open {
+                max-height: 500px;
+                padding: 0.5rem 1rem 1rem;
+            }
+
+            .nav-menu a {
+                width: 100%;
+                padding: 0.7rem 0;
+            }
+        }
+
+        /* Centralização da imagem na introdução */
+        .intro-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .control-panel-demo {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            padding: 12px;
+            width: 160px;
+            margin: 2.5rem auto;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            transform: perspective(800px) rotateX(5deg);
+        }
+
+        .control-panel-demo:hover {
+            transform: perspective(800px) rotateX(0);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+
+        .demo-button {
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 11px;
+            padding: 6px 10px;
+            min-width: 35px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-toggle {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .demo-exit {
+            background-color: #6c757d;
+            color: white;
+            font-size: 12px;
+            line-height: 1;
+            padding: 6px 8px;
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .use-case-card {
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+            height: 100%;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .use-case-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .use-case-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            background-color: rgba(74, 109, 167, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .troubleshooting-container {
+            margin: 2rem 0;
+        }
+
+        .troubleshooting-item {
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #6c757d;
+            transition: var(--transition);
+        }
+
+        .troubleshooting-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .troubleshooting-problem {
+            font-weight: 600;
+            color: var(--dark-bg);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .troubleshooting-icon {
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+
+        .troubleshooting-solution {
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .troubleshooting-solution::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .demo-checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+        }
+
+        .demo-traffic-light {
+            display: inline-flex;
+            gap: 4px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            font-size: 11px;
+            vertical-align: middle;
+        }
+
+        .demo-state {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 1px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .demo-state-false {
+            background-color: rgba(255, 68, 68, 0.3);
+        }
+
+        .demo-state-indeterminate {
+            background-color: rgba(255, 187, 51, 0.3);
+        }
+
+        .demo-state-true {
+            background-color: rgba(0, 200, 81, 0.3);
+        }
+
+        .demo-state.active {
+            color: white;
+            font-weight: bold;
+        }
+
+        .demo-state-false.active {
+            background-color: var(--danger-color);
+        }
+
+        .demo-state-indeterminate.active {
+            background-color: var(--warning-color);
+        }
+
+        .demo-state-true.active {
+            background-color: var(--success-color);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg), #1a1e21);
+            color: var(--light-text);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--danger-color), var(--warning-color), var(--success-color));
+        }
+
+        .version-info {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 0;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .feature-grid,
+            .use-case-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            .step {
+                padding: 1.2rem 1.2rem 1.2rem 3rem;
+            }
+
+            .step::before {
+                width: 30px;
+                height: 30px;
+                left: -10px;
+                font-size: 0.9rem;
+            }
+
+            .traffic-light {
+                width: 80px;
+                padding: 10px;
+            }
+
+            .light {
+                width: 60px;
+                height: 60px;
+                margin: 5px;
+            }
+
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1>FIT Traffic Lights for Choices</h1>
+            <p>Guia de Usuário - Sistema de Marcação Visual para Formulários Web</p>
+        </div>
+    </header>
+
+    <div class="nav-menu-container">
+        <button class="menu-toggle" aria-label="Menu de navegação">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="nav-menu">
+            <a href="#introducao" class="active">Introdução</a>
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#como-usar">Como usar</a>
+            <a href="#estados">Estados</a>
+            <a href="#casos-uso">Casos de uso</a>
+            <a href="#faq">Perguntas frequentes</a>
+            <a href="#solucao-problemas">Solução de problemas</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <section id="introducao">
+            <h2>Introdução</h2>
+            <p>Bem-vindo ao guia de usuário do <strong>FIT Traffic Lights for Choices</strong>, uma ferramenta inovadora
+                que adiciona um sistema visual de "semáforo" aos elementos de formulário em páginas web. Esta ferramenta
+                permite que você classifique visualmente opções em três estados (vermelho, amarelo e verde) sem
+                interferir no funcionamento original dos formulários.</p>
+
+            <p>Desenvolvida para auxiliar na análise e tomada de decisão, esta ferramenta é especialmente útil em
+                situações onde você precisa classificar ou priorizar múltiplas opções em formulários complexos,
+                questionários ou listas de verificação.</p>
+
+            <div class="intro-image-container">
+                <div class="traffic-light">
+                    <div class="light red"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green active"></div>
+                </div>
+            </div>
+            <p>O FIT Traffic Lights for Choices é uma solução temporária e não invasiva que pode ser facilmente
+                adicionada a qualquer página web, permitindo uma camada adicional de informação visual sem modificar o
+                comportamento original dos elementos de formulário.</p>
+        </section>
+
+        <section id="funcionalidades">
+            <h2>Funcionalidades Principais</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><span class="feature-icon"><i class="fas fa-traffic-light"></i></span>Sistema de 3 Estados</h3>
+                    <p>Adiciona indicadores visuais tipo "semáforo" ao lado de checkboxes e radio buttons, permitindo
+                        classificar opções em três estados distintos: Vermelho (FALSE), Amarelo (INDETERMINATE) e Verde
+                        (TRUE).</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon"><i class="fas fa-sliders"></i></span>Painel de Controle</h3>
+                    <p>Interface flutuante posicionada no canto superior direito da página, com botões para alternar a
+                        visibilidade dos indicadores (ON/OFF) e remover completamente a ferramenta quando não for mais
+                        necessária.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon"><i class="fas fa-magic"></i></span>Detecção Automática</h3>
+                    <p>Processa automaticamente todos os checkboxes e radio buttons existentes na página e utiliza
+                        MutationObserver para detectar e processar novos elementos adicionados dinamicamente.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon"><i class="fas fa-mobile-alt"></i></span>Design Responsivo</h3>
+                    <p>Interface totalmente adaptável a diferentes tamanhos de tela, com suporte específico para
+                        dispositivos móveis e telas sensíveis ao toque, garantindo uma experiência consistente em
+                        qualquer dispositivo.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon"><i class="fas fa-layer-group"></i></span>Não Invasivo</h3>
+                    <p>Funciona como uma camada visual adicional sem interferir no comportamento original dos elementos
+                        de formulário, preservando a funcionalidade original da página.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon"><i class="fas fa-broom"></i></span>Remoção Completa</h3>
+                    <p>Quando não for mais necessário, o sistema pode ser completamente removido da página,
+                        restaurando-a ao seu estado original sem deixar resíduos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="como-usar">
+            <h2>Como Usar</h2>
+            <div class="usage-steps">
+                <div class="step">
+                    <h3>Adicionar o Script ao Navegador</h3>
+                    <p>Para adicionar o script ao navegador há uma página de instalação que facilitará o processo de
+                        geração e instalação do bookmarklet. Visite-a no seguinte endereço: <a
+                            href="https://magasine.github.io/FIT_TrafficLightsForChoices/"
+                            target="_blank">https://magasine.github.io/FIT_TrafficLightsForChoices/</a></p>
+                </div>
+
+                <div class="step">
+                    <h3>Verificar a Ativação</h3>
+                    <p>Após adicionar o script, uma mensagem de boas-vindas será exibida confirmando a ativação do
+                        sistema. Você também verá um painel de controle no canto superior direito da página e
+                        indicadores visuais ao lado de cada checkbox e radio button.</p>
+                    <div class="control-panel-demo">
+                        <div class="demo-title">FIT - TRAFFIC LIGHTS FOR CHOICES</div>
+                        <div class="demo-buttons">
+                            <button class="demo-button demo-toggle">ON</button>
+                            <button class="demo-button demo-exit">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <section id="utilizar-indicadores">
+                        <h3>Utilizar os Indicadores Visuais</h3>
+                        <p>Clique nos indicadores visuais ao lado de cada checkbox ou radio button para alternar entre
+                            os três estados disponíveis (vermelho, amarelo e verde). Isso permite classificar
+                            visualmente as opções sem alterar o estado real dos elementos de formulário. Ao clicar em um
+                            indicador, ele se tornará ativo e mudará de cor, fornecendo um feedback visual claro sobre o
+                            estado selecionado. Esta funcionalidade é especialmente útil quando você precisa classificar
+                            múltiplas opções em diferentes categorias durante processos de análise ou tomada de decisão.
+                            As classificações de estados são (F)alse, (I)ndeterminate e (T)rue.
+                        </p>
+                        <div class="demo-checkbox-container">
+                            <div class="demo-traffic-light">
+                                <input type="checkbox">
+                                <div class="demo-state demo-state-false active">F</div>
+                                <input type="checkbox">
+                                <div class="demo-state demo-state-indeterminate">I</div>
+                                <input type="checkbox">
+                                <div class="demo-state demo-state-true">T</div>
+                            </div>
+                            <input type="checkbox"> Opção de exemplo
+                        </div>
+                    </section>
+                </div>
+
+                <div class="step">
+                    <h3>Controlar a Visibilidade</h3>
+                    <p>Use o botão ON/OFF no painel de controle para alternar a visibilidade dos indicadores
+                        visuais. Isso permite ocultar temporariamente os indicadores sem removê-los completamente da
+                        página. Esta funcionalidade é particularmente útil quando você precisa visualizar o
+                        formulário em seu estado original para comparação ou quando deseja reduzir temporariamente
+                        os elementos visuais na tela para focar em outras partes do conteúdo. Os indicadores
+                        permanecerão na página, mantendo seus estados, e poderão ser exibidos novamente com um
+                        simples clique no botão ON.</p>
+                </div>
+
+                <div class="step">
+                    <section id="remover-sistema">
+                        <p>Quando não precisar mais do sistema de marcação visual, clique no botão × no painel de
+                            controle. Uma mensagem de confirmação será exibida e, após confirmar, o sistema será
+                            completamente removido da página, restaurando-a ao seu estado original. Este processo de
+                            remoção é completo e limpo, eliminando todos os elementos visuais adicionados, desconectando
+                            os observadores de eventos e removendo quaisquer modificações feitas à página. É importante
+                            notar que todas as marcações visuais serão perdidas após a remoção, portanto certifique-se
+                            de ter concluído sua análise ou tomado nota das classificações importantes antes de remover
+                            o sistema.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="estados">
+            <h2>Sistema de Estados</h2>
+            <p>O FIT Traffic Lights for Choices utiliza um sistema de três estados, representados por cores diferentes,
+                para permitir a classificação visual de opções em formulários web:</p>
+
+            <div class="state-container">
+                <div class="state-indicator state-false">
+                    <div class="state-header">
+                        <span class="color-indicator color-red"></span>
+                        <span>Vermelho (FALSE)</span>
+                    </div>
+                    <p>Representa uma opção rejeitada, incorreta ou que não atende aos critérios desejados. É útil para
+                        marcar itens que devem ser desconsiderados ou que necessitam de correção.</p>
+                </div>
+
+                <div class="state-indicator state-indeterminate">
+                    <div class="state-header">
+                        <span class="color-indicator color-yellow"></span>
+                        <span>Amarelo (INDETERMINATE)</span>
+                    </div>
+                    <p>Representa uma opção em análise, parcialmente correta ou que requer mais informações. É útil para
+                        marcar itens que precisam ser revisados posteriormente ou que estão em consideração.</p>
+                </div>
+
+                <div class="state-indicator state-true">
+                    <div class="state-header">
+                        <span class="color-indicator color-green"></span>
+                        <span>Verde (TRUE)</span>
+                    </div>
+                    <p>Representa uma opção aceita, correta ou que atende plenamente aos critérios desejados. É útil
+                        para marcar itens aprovados ou que foram confirmados como válidos.</p>
+                </div>
+            </div>
+
+            <p>Importante ressaltar que estes estados são puramente visuais e não afetam o comportamento real dos
+                elementos de formulário. Isso significa que você pode usar este sistema para classificar visualmente as
+                opções sem interferir no processamento do formulário original.</p>
+        </section>
+
+        <section id="casos-uso">
+            <h2>Casos de Uso</h2>
+            <p>O FIT Traffic Lights for Choices é uma ferramenta versátil que pode ser aplicada em diversos contextos.
+                Abaixo estão alguns cenários onde esta ferramenta pode ser particularmente útil:</p>
+
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <h3><span class="use-case-icon"><i class="fas fa-clipboard-list"></i></span>Análise de Formulários
+                    </h3>
+                    <p>Ideal para formulários complexos com muitas opções que precisam ser classificadas ou priorizadas.
+                        Permite marcar visualmente itens para revisão posterior sem alterar as seleções originais.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <h3><span class="use-case-icon"><i class="fas fa-balance-scale"></i></span>Tomada de Decisão</h3>
+                    <p>Facilita a classificação de opções em "não aceitas" (vermelho), "em consideração" (amarelo) e
+                        "aceitas" (verde), auxiliando em processos de seleção com múltiplos critérios.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <h3><span class="use-case-icon"><i class="fas fa-tasks"></i></span>Revisão de Checklists</h3>
+                    <p>Permite adicionar um nível adicional de informação a listas de verificação, indicando status além
+                        do simples "marcado/não marcado", como "verificado e aprovado", "verificado e reprovado" ou
+                        "precisa de verificação adicional".</p>
+                </div>
+
+                <div class="use-case-card">
+                    <h3><span class="use-case-icon"><i class="fas fa-graduation-cap"></i></span>Ambientes Educacionais
+                    </h3>
+                    <p>Pode ser usado por professores para avaliar respostas de alunos, facilitando a marcação de
+                        questões corretas, parcialmente corretas ou incorretas durante a correção de testes online.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <h3><span class="use-case-icon"><i class="fas fa-search"></i></span>Auditorias e Inspeções</h3>
+                    <p>Auxilia profissionais que precisam classificar itens durante inspeções, permitindo marcar itens
+                        que necessitam de atenção especial, estão em conformidade ou apresentam problemas.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <h3><span class="use-case-icon"><i class="fas fa-universal-access"></i></span>Acessibilidade</h3>
+                    <p>Fornece feedback visual adicional para usuários que se beneficiam de indicações visuais claras.
+                        Os indicadores de cores podem ajudar pessoas com certas necessidades cognitivas a processar
+                        melhor as informações.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">O script modifica os dados do formulário original?</div>
+                    <div class="faq-answer">
+                        <p>Não. O FIT Traffic Lights for Choices funciona como uma camada visual adicional e não
+                            interfere no comportamento ou nos dados dos elementos de formulário originais. Os estados
+                            visuais (vermelho, amarelo e verde) são independentes do estado real dos checkboxes e radio
+                            buttons.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Os indicadores visuais são salvos quando a página é recarregada?</div>
+                    <div class="faq-answer">
+                        <p>Não. Os indicadores visuais são temporários e existem apenas durante a sessão atual. Se a
+                            página for recarregada, os indicadores voltarão ao estado inicial. Esta ferramenta é
+                            projetada para uso temporário durante a análise de formulários.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">É possível usar em qualquer site?</div>
+                    <div class="faq-answer">
+                        <p>Sim. Por ser um script injetável, o FIT Traffic Lights for Choices pode ser usado
+                            temporariamente em qualquer página web que contenha elementos de formulário como checkboxes
+                            e radio buttons. No entanto, alguns sites com medidas de segurança rigorosas podem bloquear
+                            a execução de scripts externos.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">O script funciona com elementos de formulário adicionados dinamicamente?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim. O script utiliza MutationObserver para detectar e processar novos elementos de
+                            formulário adicionados dinamicamente à página após a inicialização do sistema.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">É possível personalizar as cores ou rótulos dos estados?</div>
+                    <div class="faq-answer">
+                        <p>Na versão atual (v20250530), as cores e rótulos dos estados são predefinidos. Para
+                            personalizações, seria necessário modificar o código-fonte do script, alterando os valores
+                            no objeto CONFIG.STATES.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">O script é compatível com dispositivos móveis?</div>
+                    <div class="faq-answer">
+                        <p>Sim. O FIT Traffic Lights for Choices foi desenvolvido com design responsivo e inclui
+                            adaptações específicas para dispositivos móveis e telas sensíveis ao toque, garantindo uma
+                            experiência consistente em qualquer dispositivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucao-problemas">
+            <h2>Solução de Problemas</h2>
+            <div class="troubleshooting-container">
+                <div class="troubleshooting-item">
+                    <div class="troubleshooting-problem">
+                        <span class="troubleshooting-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        O script não está sendo aplicado a alguns elementos de formulário
+                    </div>
+                    <div class="troubleshooting-solution">
+                        <p>Verifique se os elementos são checkboxes ou radio buttons padrão. O script foi projetado para
+                            funcionar com elementos HTML padrão e pode não reconhecer componentes personalizados que
+                            simulam o comportamento de checkboxes ou radio buttons.</p>
+                    </div>
+                </div>
+
+                <div class="troubleshooting-item">
+                    <div class="troubleshooting-problem">
+                        <span class="troubleshooting-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        Mensagem "Traffic Lights For Choices já está ativo" aparece no console
+                    </div>
+                    <div class="troubleshooting-solution">
+                        <p>O script já está em execução na página. Para reiniciar, primeiro remova a instância atual
+                            clicando no botão × no painel de controle e, em seguida, execute o script novamente.</p>
+                    </div>
+                </div>
+
+                <div class="troubleshooting-item">
+                    <div class="troubleshooting-problem">
+                        <span class="troubleshooting-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        O painel de controle está sobrepondo elementos importantes da página
+                    </div>
+                    <div class="troubleshooting-solution">
+                        <p>O painel de controle é posicionado no canto superior direito da página. Se estiver
+                            interferindo com elementos importantes, você pode temporariamente ocultar o painel
+                            modificando seu CSS através do console do navegador ou remover completamente o script quando
+                            não for mais necessário.</p>
+                    </div>
+                </div>
+
+                <div class="troubleshooting-item">
+                    <div class="troubleshooting-problem">
+                        <span class="troubleshooting-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        Os indicadores visuais desapareceram após interagir com a página
+                    </div>
+                    <div class="troubleshooting-solution">
+                        <p>Verifique se o botão no painel de controle está em "ON". Se estiver em "OFF", os indicadores
+                            estão ocultos mas ainda presentes. Clique no botão para alternar para "ON" e torná-los
+                            visíveis novamente.</p>
+                    </div>
+                </div>
+
+                <div class="troubleshooting-item">
+                    <div class="troubleshooting-problem">
+                        <span class="troubleshooting-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        O script está causando conflitos com outros scripts da página
+                    </div>
+                    <div class="troubleshooting-solution">
+                        <p>O FIT Traffic Lights for Choices foi projetado para minimizar conflitos, mas em alguns casos
+                            pode interferir com outros scripts. Se notar comportamentos inesperados na página após
+                            adicionar o script, remova-o completamente clicando no botão × no painel de controle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <footer>
+        <p>FIT Traffic Lights for Choices</p>
+        <p class="version-info">Versão v20250530</p>
+    </footer>
+
+    <script>
+        // Script para funcionalidade da página do guia
+        document.addEventListener('DOMContentLoaded', function () {
+            // Funcionalidade de voltar ao topo
+            const backToTop = document.querySelector('.back-to-top');
+
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 300) {
+                    backToTop.style.display = 'flex';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+
+            backToTop.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Funcionalidade do menu de navegação
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function () {
+                    navMenu.classList.toggle('open');
+                });
+            }
+
+            // Destacar item do menu ativo durante a rolagem
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+
+            window.addEventListener('scroll', function () {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Funcionalidade para as perguntas frequentes
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function () {
+                    const answer = this.nextElementSibling;
+                    const isOpen = answer.style.display === 'block';
+
+                    answer.style.display = isOpen ? 'none' : 'block';
+
+                    if (isOpen) {
+                        this.style.borderBottom = 'none';
+                        this.style.borderRadius = 'var(--border-radius)';
+                    } else {
+                        this.style.borderBottom = '1px solid #e9ecef';
+                        this.style.borderRadius = 'var(--border-radius) var(--border-radius) 0 0';
+                    }
+                });
+            });
+
+            // Inicialmente ocultar as respostas
+            document.querySelectorAll('.faq-answer').forEach(answer => {
+                answer.style.display = 'none';
+            });
+
+            // Animação do semáforo
+            const lights = document.querySelectorAll('.traffic-light .light');
+            let activeIndex = 0;
+
+            setInterval(() => {
+                lights.forEach(light => light.classList.remove('active'));
+                activeIndex = (activeIndex + 1) % lights.length;
+                lights[activeIndex].classList.add('active');
+            }, 2000);
+
+            // Funcionalidade para copiar o script para a área de transferência
+            const copyButton = document.getElementById('copy-script-button');
+            if (copyButton) {
+                copyButton.addEventListener('click', function () {
+                    // Código completo do script
+                    const scriptCode = `javascript:(function(){
+                        "use strict";const CONFIG={NAMESPACE:"TrafficLightForChoices",VERSION:"v20250530",STATES:{FALSE:{key:"false",color:"#ff4444",label:"✖ FALSE"},INDETERMINATE:{key:"indeterminate",color:"#ffbb33",label:"？INDETERMINATE"},TRUE:{key:"true",color:"#00C851",label:"✔ TRUE"}},DEFAULT_VISIBILITY:!0};if(window[CONFIG.NAMESPACE])return void console.warn("Traffic Lights For Choices já está ativo");class TrafficLightSystem{constructor(){this.isVisible=CONFIG.DEFAULT_VISIBILITY,this.containers=new Set,this.init()}init(){try{this.injectStyles(),this.createControlPanel(),this.processExistingInputs(),this.setupMutationObserver(),this.showWelcomeMessage(),console.log(\`\${CONFIG.NAMESPACE} inicializado com sucesso\`)}catch(e){console.error(\`Erro ao inicializar \${CONFIG.NAMESPACE}:\`,e),this.cleanup()}}injectStyles(){const e=\`\${CONFIG.NAMESPACE}-styles\`;if(document.getElementById(e))return;const t=document.createElement("style");t.id=e,t.textContent=this.generateStyles(),document.head.appendChild(t)}generateStyles(){return\`
+            .\${CONFIG.NAMESPACE}-container {
+               display: none;
+               margin: 2px 5px;
+               padding: 3px 6px;
+               border-radius: 4px;
+               background: #f8f9fa;
+               border: 1px solid #dee2e6;
+               font-size: 11px;
+               vertical-align: middle;
+               transition: all 0.2s ease;
+            }
+            
+            .\${CONFIG.NAMESPACE}-container.visible {
+               display: inline-flex;
+               gap: 4px;
+               align-items: center;
+            }
+            
+            .\${CONFIG.NAMESPACE}-state {
+               display: flex;
+               align-items: center;
+               gap: 2px;
+               padding: 1px 4px;
+               border-radius: 3px;
+               cursor: pointer;
+               transition: all 0.15s ease;
+               font-weight: 500;
+            }
+            
+            .\${CONFIG.NAMESPACE}-state:hover {
+               transform: scale(1.05);
+               box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            }
+            
+            .\${CONFIG.NAMESPACE}-state input {
+               margin: 0;
+               cursor: pointer;
+            }
+            
+            .\${CONFIG.NAMESPACE}-state.active {
+               color: white;
+               font-weight: bold;
+            }
+            
+            .\${CONFIG.NAMESPACE}-control-panel {
+               position: fixed;
+               top: 10px;
+               right: 10px;
+               z-index: 999999;
+               background: rgba(255, 255, 255, 0.95);
+               backdrop-filter: blur(8px);
+               border-radius: 8px;
+               padding: 8px;
+               box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+               transition: all 0.2s ease;
+               border: 1px solid rgba(0,0,0,0.1);
+               max-width: 140px;
+            }
+            
+            .\${CONFIG.NAMESPACE}-control-panel:hover {
+               background: rgba(255, 255, 255, 0.98);
+               box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            }
+            
+            .\${CONFIG.NAMESPACE}-title {
+               font-size: 10px;
+               font-weight: 600;
+               color: #333;
+               text-align: center;
+               margin-bottom: 6px;
+               text-transform: uppercase;
+               letter-spacing: 0.5px;
+               opacity: 0.8;
+            }
+            
+            .\${CONFIG.NAMESPACE}-button-container {
+               display: flex;
+               gap: 4px;
+               justify-content: center;
+            }
+            
+            .\${CONFIG.NAMESPACE}-toggle, .\${CONFIG.NAMESPACE}-exit {
+               border: none;
+               border-radius: 4px;
+               font-weight: bold;
+               font-size: 10px;
+               cursor: pointer;
+               transition: all 0.2s ease;
+               padding: 4px 8px;
+               min-width: 30px;
+            }
+            
+            .\${CONFIG.NAMESPACE}-toggle:hover, .\${CONFIG.NAMESPACE}-exit:hover {
+               transform: translateY(-1px);
+               box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            
+            .\${CONFIG.NAMESPACE}-toggle.active {
+               background: #00C851 !important;
+               color: white;
+            }
+            
+            .\${CONFIG.NAMESPACE}-toggle.inactive {
+               background: #ff4444 !important;
+               color: white;
+            }
+            
+            .\${CONFIG.NAMESPACE}-exit {
+               background: #6c757d;
+               color: white;
+               font-size: 12px;
+               line-height: 1;
+               padding: 4px 6px;
+            }
+            
+            .\${CONFIG.NAMESPACE}-exit:hover {
+               background: #5a6268 !important;
+            }
+            
+            @media (max-width: 768px) {
+               .\${CONFIG.NAMESPACE}-control-panel {
+                  top: 8px;
+                  right: 8px;
+                  padding: 6px;
+                  max-width: 120px;
+               }
+               
+               .\${CONFIG.NAMESPACE}-title {
+                  font-size: 9px;
+                  margin-bottom: 4px;
+               }
+               
+               .\${CONFIG.NAMESPACE}-toggle, .\${CONFIG.NAMESPACE}-exit {
+                  font-size: 9px;
+                  padding: 3px 6px;
+                  min-width: 26px;
+               }
+               
+               .\${CONFIG.NAMESPACE}-container {
+                  font-size: 10px;
+                  margin: 1px 3px;
+                  padding: 2px 4px;
+               }
+            }
+            
+            @media (pointer: coarse) {
+               .\${CONFIG.NAMESPACE}-toggle, .\${CONFIG.NAMESPACE}-exit {
+                  padding: 6px 8px;
+                  min-height: 32px;
+               }
+            }
+         \`}createControlPanel(){this.controlPanel=document.createElement("div"),this.controlPanel.className=\`\${CONFIG.NAMESPACE}-control-panel\`;const e=document.createElement("div");e.className=\`\${CONFIG.NAMESPACE}-title\`,e.textContent="FIT - TRAFFIC LIGHTS FOR CHOICES";const t=document.createElement("div");t.className=\`\${CONFIG.NAMESPACE}-button-container\`,this.toggleButton=this.createButton("toggle",this.isVisible?"ON":"OFF","Ativar/Desativar checkboxes auxiliares",()=>this.toggleVisibility()),this.exitButton=this.createButton("exit","×","Remover FIT - Traffic Lights for Choices",()=>this.confirmExit()),this.updateToggleButtonState(),t.appendChild(this.toggleButton),t.appendChild(this.exitButton),this.controlPanel.appendChild(e),this.controlPanel.appendChild(t),document.body.appendChild(this.controlPanel)}createButton(e,t,i,s){const o=document.createElement("button");return o.className=\`\${CONFIG.NAMESPACE}-\${e}\`,o.textContent=t,o.title=i,o.setAttribute("aria-label",i),o.addEventListener("click",e=>{e.preventDefault(),s()}),o}updateToggleButtonState(){this.toggleButton.textContent=this.isVisible?"ON":"OFF",this.toggleButton.className=\`\${CONFIG.NAMESPACE}-toggle \${this.isVisible?"active":"inactive"}\`}processExistingInputs(){document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(e=>this.processInput(e))}processInput(e){if(this.isAlreadyProcessed(e))return;try{const t=this.createTrafficLightContainer();e.setAttribute(\`data-\${CONFIG.NAMESPACE}-processed\`,"true"),e.parentNode.insertBefore(t,e),this.containers.add(t),this.isVisible&&t.classList.add("visible")}catch(t){console.warn("Erro ao processar input:",t)}}isAlreadyProcessed(e){return e.closest(\`.\${CONFIG.NAMESPACE}-container\`)||e.hasAttribute(\`data-\${CONFIG.NAMESPACE}-processed\`)}createTrafficLightContainer(){const e=document.createElement("div");e.className=\`\${CONFIG.NAMESPACE}-container\`,this.isVisible&&e.classList.add("visible");const t=this.generateId();return Object.values(CONFIG.STATES).forEach(i=>{e.appendChild(this.createStateElement(i,t))}),e}createStateElement(e,t){const i=document.createElement("div");i.className=\`\${CONFIG.NAMESPACE}-state\`,i.style.backgroundColor=\`\${e.color}50\`,i.title=e.label;const s=document.createElement("input");s.type="radio",s.name=\`\${CONFIG.NAMESPACE}-group-\${t}\`,s.className=\`\${CONFIG.NAMESPACE}-\${e.key}\`,s.setAttribute("aria-label",e.label);const o=document.createElement("span");return o.textContent=e.label.charAt(0),s.addEventListener("change",()=>{s.checked&&this.updateContainerState(i.parentNode,e)}),i.addEventListener("click",e=>{e.target!==s&&(s.checked=!0,s.dispatchEvent(new Event("change")))}),i.appendChild(s),i.appendChild(o),i}updateContainerState(e,t){this.clearContainerStates(e);const i=e.querySelector(\`.\${CONFIG.NAMESPACE}-\${t.key}\`).parentNode;i.classList.add("active"),i.style.backgroundColor=t.color,e.style.backgroundColor=\`\${t.color}50\`}clearContainerStates(e){e.querySelectorAll(\`.\${CONFIG.NAMESPACE}-state\`).forEach(e=>{e.classList.remove("active"),e.style.backgroundColor=""}),e.style.backgroundColor=""}toggleVisibility(){this.isVisible=!this.isVisible,this.containers.forEach(e=>{e.classList.toggle("visible",this.isVisible)}),this.updateToggleButtonState()}confirmExit(){if(confirm(this.getExitConfirmationMessage()))this.cleanup()}getExitConfirmationMessage(){return["FIT - TRAFFIC LIGHTS FOR CHOICES","","Deseja realmente remover a ferramenta?","","• Todas as marcações auxiliares serão perdidas","• A página será restaurada ao estado original","","Esta ação não pode ser desfeita."].join("\\n")}setupMutationObserver(){this.observer=new MutationObserver(e=>{e.some(e=>e.addedNodes.length>0)&&requestIdleCallback(()=>this.processExistingInputs())}),this.observer.observe(document.body,{childList:!0,subtree:!0})}processNewInputs(e){const t=e.querySelectorAll?e.querySelectorAll('input[type="checkbox"], input[type="radio"]'):[];t.forEach(e=>this.processInput(e)),e.matches&&e.matches('input[type="checkbox"], input[type="radio"]')&&this.processInput(e)}showWelcomeMessage(){setTimeout(()=>{const e=this.getWelcomeMessage();"function"==typeof alert?alert(e):console.log(e)},100)}getWelcomeMessage(){return[\`FIT - TRAFFIC LIGHTS FOR CHOICES - \${CONFIG.VERSION}\`,"","🚦 Sistema de 3 Estados Ativado!","","🔴 Vermelho = FALSE","🟡 Amarelo = INDETERMINATE","🟢 Verde = TRUE","","CONTROLES:","• ON/OFF: Alternar visibilidade","• × : Remover ferramenta","","IMPORTANTE:","Marcações são apenas visuais e não afetam","o processamento do formulário original.","","Use para auxiliar na análise e tomada de decisão!"].join("\\n")}generateId(){return Math.random().toString(36).substr(2,9)}cleanup(){try{this.observer&&this.observer.disconnect(),this.controlPanel&&this.controlPanel.remove();const e=document.getElementById(\`\${CONFIG.NAMESPACE}-styles\`);e&&e.remove(),this.containers.forEach(e=>{e.parentNode&&e.remove()}),document.querySelectorAll(\`[data-\${CONFIG.NAMESPACE}-processed]\`).forEach(e=>{e.removeAttribute(\`data-\${CONFIG.NAMESPACE}-processed\`)}),delete window[CONFIG.NAMESPACE],delete window[\`\${CONFIG.NAMESPACE}Cleanup\`],console.log(\`\${CONFIG.NAMESPACE} removido com sucesso\`)}catch(e){console.error("Erro durante cleanup:",e)}}}window[\`\${CONFIG.NAMESPACE}Cleanup\`]=function(){window[CONFIG.NAMESPACE]&&window[CONFIG.NAMESPACE].cleanup()};try{window[CONFIG.NAMESPACE]=new TrafficLightSystem}catch(e){console.error(\`Falha ao inicializar \${CONFIG.NAMESPACE}:\`,e)}
+                    })();`;
+
+                    // Copiar para a área de transferência
+                    navigator.clipboard.writeText(scriptCode)
+                        .then(() => {
+                            // Feedback visual de sucesso
+                            const originalText = copyButton.innerHTML;
+                            copyButton.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                            copyButton.style.backgroundColor = '#00C851';
+                            copyButton.style.color = 'white';
+
+                            // Restaurar o botão após 2 segundos
+                            setTimeout(() => {
+                                copyButton.innerHTML = originalText;
+                                copyButton.style.backgroundColor = '';
+                                copyButton.style.color = '';
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Erro ao copiar: ', err);
+                            alert('Não foi possível copiar o código. Por favor, tente novamente ou copie manualmente.');
+                        });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
